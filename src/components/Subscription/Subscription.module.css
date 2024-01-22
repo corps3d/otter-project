@@ -1,0 +1,169 @@
+.switchMain {
+  display: flex;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.toggleItems {
+  margin: 0.5rem;
+}
+
+/* toggle switch  */
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.checkbox {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.checkbox:checked + .slider {
+  background-color: #2196f3;
+}
+
+.checkbox:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+.checkbox:checked + .slider:before {
+  transform: translateX(26px);
+}
+/* card  */
+
+.planMain {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.priceMain {
+  display: flex;
+  margin: 1rem 0;
+}
+.iconMain {
+  display: flex;
+  margin: 1rem 0;
+}
+.cardItemMain {
+  margin: 0.5rem 0.5rem;
+  border: 1px solid lightgrey;
+  padding: 0.5rem 1.25rem;
+  border-radius: 10px;
+  width: 50%;
+}
+.cardItemMain p {
+  margin: 0;
+}
+.cardItemMain p:nth-child(1) {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+.cardItemMain p:nth-child(2),
+.cardItemMain p:nth-child(4) {
+  font-size: 0.75rem;
+  color: grey;
+}
+.cardItemMain p:nth-child(3) {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+.cardItemMain p:nth-child(4) {
+  margin: 1rem 0;
+}
+.cardItemMain p:nth-child(3) span {
+  font-size: 1.75rem;
+}
+.planButton {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #2196f3;
+  background: transparent;
+  color: #2196f3;
+  transition: 0.3s;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+.planButton:hover {
+  color: #fff;
+  background-color: #2196f3;
+}
+.includeListItem {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: 0.75rem 0;
+}
+.blackText {
+  color: #000 !important;
+}
+.subscriptionCardIcon {
+  margin-right: 0.5rem;
+}
+/* .mainTablePlan {
+  padding: 0.5rem 1rem;
+}
+.mainTablePlan p:nth-child(1) {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.mainTablePlan p:nth-child(2) {
+  font-size: 0.75rem;
+  color: grey;
+}
+.tableConatiner table .mainTD td:nth-child(2) {
+  border-top: 3px solid #52cd92;
+}
+
+.tableConatiner table .mainTD td:nth-child(3) {
+  border-top: 3px solid #fea643;
+}
+
+.tableConatiner table .mainTD td:nth-child(4) {
+  border-top: 3px solid #208cff;
+}
+
+.tableConatiner table .mainTD td:nth-child(5) {
+  border-top: 3px solid #7f5fff;
+} */
+@media only screen and (max-width: 720px) {
+  .priceMain {
+    display: flex;
+    flex-direction: column;
+  }
+  .cardItemMain {
+    width: 100%;
+  }
+  .iconMain {
+    display: flex;
+    margin: 1rem 0;
+  }
+}

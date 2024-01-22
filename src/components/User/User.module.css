@@ -1,0 +1,149 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1.5rem 0;
+}
+.mainHeading {
+  text-align: center;
+}
+.userCard {
+  width: 50%;
+  box-shadow: 0 4px 6px 4px lightgrey;
+  padding: 2rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top div {
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.top a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #5f89c2;
+}
+.data {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0.75rem 0;
+}
+.data img {
+  width: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+.data div {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.mainDataFlex {
+  display: flex;
+  justify-content: space-between;
+}
+.dataFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+.dataFlex .detailItems {
+  margin: 0.5rem 0;
+}
+.dataFlex .detailItems p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+.dataFlex .detailItems p:nth-child(1) {
+  font-weight: 600;
+}
+.moreDetails {
+  width: 60%;
+}
+.moreDetails .dataFlex2 {
+  display: flex;
+  margin: 1rem 0;
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid lightgrey;
+  cursor: pointer;
+}
+.moreDetails .dataFlex2 .mainDetailsInner {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2rem;
+}
+.moreDetails .dataFlex2 div {
+  font-size: 1.1rem;
+  font-weight: 500;
+  width: 15%;
+}
+.moreDetails .dataFlex2 .mainDetailsInner div {
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  color: grey;
+}
+.bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+.bottom p {
+  font-size: 1rem;
+  color: grey;
+}
+.bottom p:nth-child(2),
+.bottom p:nth-child(3) {
+  margin: 0;
+}
+.bottom p:nth-child(2) {
+  font-size: 0.9rem;
+}
+.bottom p:nth-child(3) {
+  font-weight: 600;
+}
+@media only screen and (max-width: 720px) {
+  .userCard {
+    width: 80%;
+  }
+  .data img {
+    width: 60px;
+    width: 60px;
+  }
+  .data div {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  .mainDataFlex {
+    flex-direction: column;
+  }
+  .moreDetails {
+    width: 100%;
+    padding: 0 0.25rem;
+  }
+  .moreDetails .dataFlex2 div {
+    font-size: 1rem;
+  }
+  .moreDetails .dataFlex2 .mainDetailsInner div {
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+  }
+  .moreDetails .dataFlex2 .mainDetailsInner {
+    margin: 0 1rem 0 2rem;
+  }
+}

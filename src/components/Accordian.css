@@ -1,0 +1,30 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.25rem;
+  border-bottom: 1px solid #000;
+}
+.top div {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.accordian-icon {
+  margin: 0 0.5rem;
+}
+.accordian-wrapper {
+  margin: 1rem 0;
+}
+.accordian-data {
+  padding: 0.25rem;
+}
+.accordian-data div {
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.accordian-data div:hover {
+  background-color: #b3d4ff;
+}
+/* @media only screen and (max-width: 720px) {
+} */

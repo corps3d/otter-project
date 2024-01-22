@@ -1,0 +1,34 @@
+.main {
+  background-color: #fafafc;
+  padding: 1rem;
+  padding-top: 1rem;
+}
+.date {
+  font-size: 1.5rem;
+  color: grey;
+  font-weight: 600;
+}
+.inner {
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.flex {
+  margin: 0;
+  display: flex;
+}
+.title {
+  margin: 0.25rem 0;
+  font-weight: 600;
+}
+.flex p {
+  margin-right: 0.5rem;
+  font-size: 0.85rem;
+  color: grey;
+}
+.normal {
+  font-size: 1rem;
+  color: #000;
+}
