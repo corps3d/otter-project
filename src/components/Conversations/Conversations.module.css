@@ -7,14 +7,15 @@
   padding-top: 1rem;
 }
 .date {
-  font-size: 1.5rem;
-  color: grey;
+  font-size: 1rem;
+  color: #000;
   font-weight: 600;
+  border-bottom: 1px solid lightgrey;
+  padding: 0.5rem 0;
 }
 .inner {
   background-color: #fff;
   padding: 1rem;
-  border: 1px solid grey;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -37,6 +38,15 @@
 }
 .inner:hover {
   background-color: #f2f8ff;
+}
+.mainPencil {
+  padding: 1rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.mainPencil .pencil {
+  color: grey;
+  margin-right: 0.25rem;
 }
 @media only screen and (max-width: 720px) {
   .homeMain {

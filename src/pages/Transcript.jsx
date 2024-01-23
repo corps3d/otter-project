@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
-import styles from "../components/Summary/Summary.module.css";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFaceSmile,
+  faX,
   faPencil,
   faMessage,
   faPager,
@@ -13,8 +12,12 @@ import {
   faForward,
   faImage,
   faStar,
+  faEllipsis,
+  faArrowUp,
+  faCircleInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import transcriptStyles from "./Transcript.module.css";
+import { OverlayTrigger, Tooltip, Dropdown } from "react-bootstrap";
 import Person from "../assets/person.png";
 import Person1 from "../assets/otter.png";
 import Person2 from "../assets/microsoft.png";
@@ -27,6 +30,59 @@ const Transcript = (props) => {
   const [speed, setSpeed] = useState(1);
   const [hoveredStar, setHoveredStar] = useState(null);
   const [selectedStar, setSelectedStar] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hoveredTime, setHoveredTime] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
+  const [selectedSpeed, setSelectedSpeed] = useState(1);
+  const [isChecked, setChecked] = useState(false);
+  const [showHighlights, setShowHighlights] = useState(true);
+  const [isEditingMode, setIsEditingMode] = useState(false);
+
+  const handleEditButtonClick = () => {
+    setIsEditingMode(!isEditingMode);
+  };
+  const handleHighlightToggle = () => {
+    setShowHighlights(!showHighlights);
+  };
+  const closeDropdown = () => {
+    setShowSpeedMenu(false);
+  };
+
+  const handleToggle = () => {
+    setChecked(!isChecked);
+  };
+
+  const toggleSpeedMenu = () => {
+    setShowSpeedMenu(!showSpeedMenu);
+  };
+  const selectSpeed = (speed) => {
+    setSpeed(speed);
+    audioRef.current.playbackRate = speed;
+    setSelectedSpeed(speed);
+    setShowSpeedMenu(false);
+  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const showButtonThreshold = 300;
+
+      setIsVisible(scrollY > showButtonThreshold);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const handleStarHover = (index) => {
     setHoveredStar(index);
@@ -57,12 +113,22 @@ const Transcript = (props) => {
   const timeUpdateHandler = () => {
     setCurrentTime(audioRef.current.currentTime);
   };
-
   const dragHandler = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const sliderWidth = rect.width;
+    const hoverPercentage = offsetX / sliderWidth;
     const { duration } = audioRef.current;
-    const dragTime = (e.target.value / 100) * duration;
-    setCurrentTime(dragTime);
-    audioRef.current.currentTime = dragTime;
+    const hoverTime = hoverPercentage * duration;
+
+    setCurrentTime(audioRef.current.currentTime);
+    setHoveredTime(hoverTime);
+
+    // Calculate tooltip position
+    const tooltipX = rect.left + offsetX;
+    const tooltipY = rect.top - 30; // Adjust the tooltip position based on your styling
+
+    setTooltipPosition({ x: tooltipX, y: tooltipY });
   };
 
   const speedChangeHandler = (newSpeed) => {
@@ -78,164 +144,298 @@ const Transcript = (props) => {
     audioRef.current.currentTime = newTime;
   };
   return (
-    <div className={transcriptStyles.transcriptMain}>
-      <div className={transcriptStyles.keywordsMain}>
-        <p>Keywords</p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Non labore
-          blanditiis exercitationem totam quas eveniet doloribus eos delectus,
-          ullam harum veritatis quis maxime iusto iure alias, dicta aperiam
-          cumque et.
-        </p>
-      </div>
-      <div className={transcriptStyles.speakersMain}>
-        <p>Speakers</p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Non labore
-          blanditiis exercitationem totam quas eveniet doloribus eos delectus,
-          ullam harum veritatis quis maxime iusto iure alias, dicta aperiam
-          cumque et.
-        </p>
-      </div>
-      <TranscriptItem />
-      <TranscriptItem />
-      <TranscriptItem />
-      <div
-        className={transcriptStyles.audioPlayerContainer}
-        style={{ width: width }}
-      >
-        <div className={transcriptStyles.audioPlayer}>
-          <audio
-            ref={audioRef}
-            src={AudioMusic}
-            onTimeUpdate={timeUpdateHandler}
+    <>
+      <div className={transcriptStyles.editButtonMain}>
+        <button onClick={handleEditButtonClick} style={{ color: "#000" }}>
+          <FontAwesomeIcon
+            icon={faPencil}
+            className={transcriptStyles.pencil}
           />
-          <div className={transcriptStyles.sliderMain}>
-            <span>{formatTime(currentTime)}</span>
-            <input
-              type="range"
-              value={(currentTime / audioRef.current?.duration) * 100 || 0}
-              onChange={dragHandler}
+          {isEditingMode ? "Done" : "Edit"}
+        </button>
+      </div>
+      <div>
+        {isVisible && (
+          <div
+            className={transcriptStyles.scrollToTopButton}
+            onClick={scrollToTop}
+          >
+            <FontAwesomeIcon icon={faArrowUp} />
+          </div>
+        )}
+      </div>
+      <div className={transcriptStyles.transcriptMain}>
+        <div className={transcriptStyles.keywordsMain}>
+          <p>Keywords</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non labore
+            blanditiis exercitationem totam quas eveniet doloribus eos delectus,
+            ullam harum veritatis quis maxime iusto iure alias, dicta aperiam
+            cumque et.
+          </p>
+        </div>
+        <div className={transcriptStyles.speakersMain}>
+          <p>Speakers</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non labore
+            blanditiis exercitationem totam quas eveniet doloribus eos delectus,
+            ullam harum veritatis quis maxime iusto iure alias, dicta aperiam
+            cumque et.
+          </p>
+        </div>
+        <div className={transcriptStyles.highlightMain}>
+          <div>Show Highlights</div>
+          <div
+            className={transcriptStyles.toggleItems}
+            style={{ marginTop: "1rem" }}
+          >
+            <label className={transcriptStyles.toggleSwitch}>
+              <input
+                type="checkbox"
+                checked={showHighlights}
+                onChange={handleHighlightToggle}
+                className={transcriptStyles.checkbox}
+              />
+              <span className={transcriptStyles.slider}></span>
+            </label>
+          </div>
+        </div>
+        <TranscriptItem isEditingMode={isEditingMode} />
+        <TranscriptItem isEditingMode={isEditingMode} />
+        <TranscriptItem isEditingMode={isEditingMode} />
+        <div
+          className={transcriptStyles.audioPlayerContainer}
+          style={{ width: width }}
+        >
+          <div className={transcriptStyles.audioPlayer}>
+            <audio
+              ref={audioRef}
+              src={AudioMusic}
+              onTimeUpdate={timeUpdateHandler}
             />
-            <span>{formatTime(audioRef.current?.duration)}</span>
-          </div>
-          <div className={transcriptStyles.controls}>
-            <div className={transcriptStyles.controlsMain}>
-              <div>
-                <button
-                  onClick={() => skipTime(-5)}
-                  className={transcriptStyles.audioControls}
-                >
-                  <FontAwesomeIcon
-                    icon={faBackward}
-                    className={transcriptStyles.playPauseIcons}
-                  />
-                </button>
+            <div className={transcriptStyles.sliderMain}>
+              <span>{formatTime(currentTime)}</span>
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip
+                    id="slider-tooltip"
+                    style={{ left: tooltipPosition.x, top: tooltipPosition.y }}
+                  >
+                    Submarine, citizenship, workflow <br />{" "}
+                    {formatTime(hoveredTime)}
+                  </Tooltip>
+                }
+                onMouseMove={dragHandler}
+              >
+                <input
+                  type="range"
+                  value={(currentTime / audioRef.current?.duration) * 100 || 0}
+                  onChange={() => {}} // No need to update the state during the hover
+                />
+              </OverlayTrigger>
 
-                <button
-                  onClick={playPauseHandler}
-                  className={transcriptStyles.audioControls}
-                >
-                  {isPlaying ? (
-                    <>
+              <span>{formatTime(audioRef.current?.duration)}</span>
+            </div>
+            <div className={transcriptStyles.controls}>
+              <div className={transcriptStyles.controlsMain}>
+                <div>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="pencil-tooltip">Rewind 5 seconds</Tooltip>
+                    }
+                  >
+                    <button
+                      onClick={() => skipTime(-5)}
+                      className={transcriptStyles.audioControls}
+                    >
                       <FontAwesomeIcon
-                        icon={faPause}
+                        icon={faBackward}
                         className={transcriptStyles.playPauseIcons}
                       />
-                    </>
-                  ) : (
-                    <>
+                    </button>
+                  </OverlayTrigger>
+
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip id="pencil-tooltip">Play/Pause</Tooltip>}
+                  >
+                    <button
+                      onClick={playPauseHandler}
+                      className={transcriptStyles.audioControls}
+                    >
+                      {isPlaying ? (
+                        <>
+                          <FontAwesomeIcon
+                            icon={faPause}
+                            className={transcriptStyles.playPauseIcons}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <FontAwesomeIcon
+                            icon={faPlay}
+                            className={transcriptStyles.playPauseIcons}
+                          />
+                        </>
+                      )}
+                    </button>
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="pencil-tooltip">
+                        Fast Forward 5 seconds
+                      </Tooltip>
+                    }
+                  >
+                    <button
+                      onClick={() => skipTime(+5)}
+                      className={transcriptStyles.audioControls}
+                    >
                       <FontAwesomeIcon
-                        icon={faPlay}
+                        icon={faForward}
                         className={transcriptStyles.playPauseIcons}
                       />
-                    </>
-                  )}
-                </button>
-                <button
-                  onClick={() => skipTime(+5)}
-                  className={transcriptStyles.audioControls}
-                >
-                  <FontAwesomeIcon
-                    icon={faForward}
-                    className={transcriptStyles.playPauseIcons}
-                  />
-                </button>
+                    </button>
+                  </OverlayTrigger>
+                </div>
+                <div className="d-flex justify-content-center align-items-center">
+                  <Dropdown show={showSpeedMenu} onToggle={toggleSpeedMenu}>
+                    <Dropdown.Toggle
+                      variant="success"
+                      id="dropdown-speed"
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        color: "#000",
+                      }}
+                    >
+                      {selectedSpeed}x
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className={transcriptStyles.dropDownMain}>
+                      <div className={transcriptStyles.speedDDTop}>
+                        <div>Playback Options</div>
+                        <div>
+                          <FontAwesomeIcon
+                            icon={faX}
+                            className={transcriptStyles.cross}
+                            onClick={closeDropdown}
+                          />
+                        </div>
+                      </div>
+                      <div className={transcriptStyles.mid}>
+                        <div>
+                          <FontAwesomeIcon
+                            icon={faCircleInfo}
+                            className={transcriptStyles.icons}
+                          />
+                          <a href="#" style={{ fontWeight: "500" }}>
+                            Upgrade
+                          </a>
+                          <strong> to unlock more playback speeds.</strong>
+                        </div>
+                      </div>
+                      <div className={transcriptStyles.speed}>Speed</div>
+                      <div className={transcriptStyles.flex}>
+                        {[0.5, 1, 1.5, 2, 2.5, 3].map((speed) => (
+                          <Dropdown.Item
+                            key={speed}
+                            onClick={() => selectSpeed(speed)}
+                            style={{ color: "grey", fontWeight: "600" }}
+                          >
+                            {speed}x
+                          </Dropdown.Item>
+                        ))}
+                      </div>
+                      <div className={transcriptStyles.bottomDD}>
+                        <div>Keep Silence</div>
+                        <div className={transcriptStyles.toggleItems}>
+                          <label className={transcriptStyles.toggleSwitch}>
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={handleToggle}
+                              className={transcriptStyles.checkbox}
+                            />
+                            <span className={transcriptStyles.slider}></span>
+                          </label>
+                        </div>
+                      </div>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
               </div>
               <div>
-                <button
-                  onClick={() => speedChangeHandler(1)}
-                  className={transcriptStyles.audioControls}
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip id="pencil-tooltip">Edit</Tooltip>}
                 >
-                  1x
-                </button>
-                <button
-                  onClick={() => speedChangeHandler(2)}
-                  className={transcriptStyles.audioControls}
+                  <FontAwesomeIcon
+                    icon={faPencil}
+                    className={transcriptStyles.hoverIcons}
+                  />
+                </OverlayTrigger>
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip id="pencil-tooltip">Comment</Tooltip>}
                 >
-                  2x
-                </button>
-                <button
-                  onClick={() => speedChangeHandler(3)}
-                  className={transcriptStyles.audioControls}
+                  <FontAwesomeIcon
+                    icon={faPager}
+                    className={transcriptStyles.hoverIcons}
+                  />
+                </OverlayTrigger>
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip id="pencil-tooltip">Image</Tooltip>}
                 >
-                  3x
-                </button>
+                  <FontAwesomeIcon
+                    icon={faImage}
+                    className={transcriptStyles.hoverIcons}
+                  />
+                </OverlayTrigger>
               </div>
             </div>
-            <div>
-              <FontAwesomeIcon
-                icon={faPencil}
-                className={transcriptStyles.hoverIcons}
-              />
-              <FontAwesomeIcon
-                icon={faPager}
-                className={transcriptStyles.hoverIcons}
-              />
-              <FontAwesomeIcon
-                icon={faImage}
-                className={transcriptStyles.hoverIcons}
-              />
+          </div>
+        </div>
+        <div className={transcriptStyles.rating}>
+          <div className={transcriptStyles.innerRating}>
+            <p>Rate Transcript Quality</p>
+            <div className={transcriptStyles.starIcons}>
+              {[1, 2, 3, 4, 5].map((index) => (
+                <FontAwesomeIcon
+                  key={index}
+                  icon={faStar}
+                  className={`${transcriptStyles.hoverIcons} ${
+                    hoveredStar !== null && index <= hoveredStar
+                      ? transcriptStyles.hovered
+                      : ""
+                  } ${
+                    selectedStar !== null && index <= selectedStar
+                      ? transcriptStyles.selected
+                      : ""
+                  }`}
+                  onMouseEnter={() => handleStarHover(index)}
+                  onMouseLeave={resetHoveredStar}
+                  onClick={() => handleStarClick(index)}
+                />
+              ))}
             </div>
           </div>
         </div>
       </div>
-      <div className={transcriptStyles.rating}>
-        <div className={transcriptStyles.innerRating}>
-          <p>Rate Transcript Quality</p>
-          <div className={transcriptStyles.starIcons}>
-            {[1, 2, 3, 4, 5].map((index) => (
-              <FontAwesomeIcon
-                key={index}
-                icon={faStar}
-                className={`${transcriptStyles.hoverIcons} ${
-                  hoveredStar !== null && index <= hoveredStar
-                    ? transcriptStyles.hovered
-                    : ""
-                } ${
-                  selectedStar !== null && index <= selectedStar
-                    ? transcriptStyles.selected
-                    : ""
-                }`}
-                onMouseEnter={() => handleStarHover(index)}
-                onMouseLeave={resetHoveredStar}
-                onClick={() => handleStarClick(index)}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
 export default Transcript;
-const TranscriptItem = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const TranscriptItem = ({ isEditingMode }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut possimus unde laborum accusantium molestias temporibus autem, magnam dolorem sit deserunt at, odio sapiente magni necessitatibus natus eos quidem soluta ex?"
   );
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleEditStart = () => {
     setIsEditing(true);
@@ -243,7 +443,6 @@ const TranscriptItem = () => {
 
   const handleEditFinish = () => {
     setIsEditing(false);
-    // You can save the edited content to your state or perform any necessary actions.
   };
 
   const handleInputChange = (e) => {
@@ -261,10 +460,23 @@ const TranscriptItem = () => {
     setSelectedUser(user);
     setIsOpen(false);
   };
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleEditFinish();
-    }
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        handleEditFinish();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isEditing]);
+
+  const handleSearchClick = (e) => {
+    e.stopPropagation();
   };
 
   return (
@@ -275,65 +487,109 @@ const TranscriptItem = () => {
             className={transcriptStyles.user}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <img src={selectedUser.image} alt="user" />
+            <img
+              src={selectedUser.image}
+              alt="user"
+              className={transcriptStyles.image}
+            />
             <div className={transcriptStyles.name}>{selectedUser.name}</div>
             {isOpen && (
               <div className={transcriptStyles.dropdown}>
+                <div className={transcriptStyles.suggestedSpeakers}>
+                  Suggested Speakers
+                </div>
                 {users.map((user) => (
                   <div
-                    key={user.name}
+                    className={transcriptStyles.itemsMain}
                     onClick={() => handleUserClick(user)}
-                    className={transcriptStyles.dropdownItems}
                   >
-                    <img
-                      src={user.image}
-                      alt={user.name}
-                      className={transcriptStyles.dropdownImage}
-                    />
-                    {user.name}
+                    <div
+                      key={user.name}
+                      className={transcriptStyles.dropdownItems}
+                    >
+                      <img
+                        src={user.image}
+                        alt={user.name}
+                        className={transcriptStyles.dropdownImage}
+                      />
+                      {user.name}
+                    </div>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faEllipsis}
+                        className={transcriptStyles.ellipsis}
+                      />
+                    </div>
                   </div>
                 ))}
+                <div className={transcriptStyles.dropdownInput}>
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    onClick={handleSearchClick}
+                  />
+                  <button>Tag</button>
+                </div>
               </div>
             )}
           </div>
           <div className={transcriptStyles.time}>0:00</div>
         </div>
         <div className={transcriptStyles.paragraph}>
-          {isEditing ? (
+          {isEditing || isEditingMode ? (
             <textarea
               rows={Math.max(3, Math.ceil(editedContent.length / 50))}
               value={editedContent}
               onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
               onBlur={handleEditFinish}
               style={{ width: "100%" }}
+              className={transcriptStyles.textarea}
             />
           ) : (
             editedContent
           )}
         </div>
         <div className={transcriptStyles.hover}>
-          <FontAwesomeIcon
-            icon={faFaceSmile}
-            className={transcriptStyles.hoverIcons}
-          />
-          <FontAwesomeIcon
-            icon={faPencil}
-            className={transcriptStyles.hoverIcons}
-            onClick={handleEditStart}
-          />
-          <FontAwesomeIcon
-            icon={faMessage}
-            className={transcriptStyles.hoverIcons}
-          />
-          <FontAwesomeIcon
-            icon={faPager}
-            className={transcriptStyles.hoverIcons}
-          />
-          <FontAwesomeIcon
-            icon={faShareNodes}
-            className={transcriptStyles.hoverIcons}
-          />
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="pencil-tooltip">Highlight</Tooltip>}
+          >
+            <FontAwesomeIcon
+              icon={faPencil}
+              className={transcriptStyles.hoverIcons}
+              onClick={handleEditStart}
+            />
+          </OverlayTrigger>
+
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="message-tooltip">Comment</Tooltip>}
+          >
+            <FontAwesomeIcon
+              icon={faMessage}
+              className={transcriptStyles.hoverIcons}
+            />
+          </OverlayTrigger>
+
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="pager-tooltip">Copy</Tooltip>}
+          >
+            <FontAwesomeIcon
+              icon={faPager}
+              className={transcriptStyles.hoverIcons}
+            />
+          </OverlayTrigger>
+
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="share-tooltip">Share</Tooltip>}
+          >
+            <FontAwesomeIcon
+              icon={faShareNodes}
+              className={transcriptStyles.hoverIcons}
+            />
+          </OverlayTrigger>
         </div>
       </div>
     </>

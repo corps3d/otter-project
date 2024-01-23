@@ -2,7 +2,7 @@
 .heading1 {
   text-align: center;
   color: #05294b;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: 600;
   margin: 1rem 0;
 }
@@ -11,8 +11,11 @@
   font-size: 16px;
   font-weight: 500;
 }
+.mainContainerLogin {
+  padding: 0 3rem;
+}
 .mainLine {
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,11 +89,16 @@
 .createAccount {
   margin-top: 1.75rem;
   text-align: center;
+  color: #000;
+  text-decoration: none !important;
 }
 .privacyPolicy {
-  margin-top: 1.75rem;
+  margin-top: 1rem;
   text-align: center;
   font-size: 14px;
+}
+.createAccount a {
+  font-size: 1.1rem;
 }
 .createAccount a,
 .privacyPolicy a {
@@ -109,7 +117,7 @@
   padding: 0 10rem;
 }
 .signupRight {
-  padding: 10rem;
+  padding: 0 10rem;
 }
 .person {
   width: 100%;
@@ -249,14 +257,50 @@
 .upperText p:nth-child(2) {
   color: rgb(118, 118, 118);
 }
+.rightMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media only screen and (max-width: 600px) {
   .mainContainer1 {
-    padding: 0;
+    padding: 0 !important;
   }
   .signupRight {
     display: none;
   }
   .uploadBtn {
     padding: 1rem 4rem;
+  }
+  .mainContainerLogin {
+    padding: 0;
+  }
+  .mainContainer {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  .heading,
+  .heading1 {
+    text-align: left;
+    margin-left: 0.25rem;
+  }
+  .createAccount,
+  .privacyPolicy {
+    text-align: left;
+  }
+  .navbar {
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: none;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .mainContainer1 {
+    padding: 0 3rem;
+  }
+  .signupRight {
+    padding: 0 3rem;
   }
 }

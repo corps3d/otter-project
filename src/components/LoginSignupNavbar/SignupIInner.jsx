@@ -23,7 +23,6 @@ const SignupIInner = () => {
             <div className="d-flex flex-column justify-content-center align-items-center">
               <SocialButtons title="Google" logo={<GoogleLogo />} />
               <SocialButtons title="Microsoft" logo={<MicrosoftLogo />} />
-              <SocialButtons title="Apple" logo={<AppleLogo />} />
             </div>
             <div className={styles.mainLine}>
               <div className={styles.line}></div>
@@ -58,11 +57,12 @@ const SignupIInner = () => {
               </Link>
             </div>
             <div>
-              <Link to="/">
-                <p className={styles.createAccount}>
-                  Already have an Otter Account? <a href="#">Sign in</a>
-                </p>
-              </Link>
+              <p className={styles.createAccount}>
+                Already have an Otter Account?{" "}
+                <Link to="/">
+                  <a href="#">Sign in</a>
+                </Link>
+              </p>
             </div>
             <div>
               <p className={styles.privacyPolicy}>
@@ -72,7 +72,7 @@ const SignupIInner = () => {
             </div>
           </Form>
         </div>
-        <div className="col-md-6">
+        <div className={`col-md-6 ${styles.rightMain}`}>
           <div className={styles.signupRight}>
             <div className="personMain">
               <div className={styles.person}>

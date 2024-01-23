@@ -14,7 +14,7 @@ const Login = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-4"></div>
-          <div className="col-md-4">
+          <div className={`col-md-4 ${styles.mainContainerLogin}`}>
             <Form className={styles.mainContainer}>
               <h2 className={styles.heading}>Sign In</h2>
               <div className="d-flex flex-column justify-content-center align-items-center">
@@ -55,11 +55,21 @@ const Login = () => {
                 </Link>
               </div>
               <div>
-                <Link to="/signup">
-                  <p className={styles.createAccount}>
-                    or <a href="#">Create One</a>
-                  </p>
-                </Link>
+                <p className={styles.createAccount}>
+                  or{" "}
+                  <Link to="/signup">
+                    <a href="#" style={{ textDecoration: "none" }}>
+                      Create One
+                    </a>
+                  </Link>
+                </p>
+              </div>
+              <div>
+                <p className={styles.privacyPolicy}>
+                  By using Otter you agree to the{" "}
+                  <a href="#">Terms of Service</a> and{" "}
+                  <a href="#">Privacy Policy.</a>
+                </p>
               </div>
             </Form>
           </div>

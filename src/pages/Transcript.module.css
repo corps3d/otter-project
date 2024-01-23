@@ -118,6 +118,7 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 0.25rem 1rem;
+  color: #000;
 }
 .controlsMain {
   display: flex;
@@ -131,12 +132,64 @@
   left: 2%;
   background-color: #fff;
   border: 1px solid #ccc;
-  padding: 5px;
+  padding: 0.5rem;
   z-index: 1;
+  border-radius: 5px;
+  width: 250px;
+  box-shadow: 0 4px 6px 4px lightgrey;
+}
+.dropdownInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid lightgrey;
+  padding: 0 0.5rem;
+}
+.dropdownInput:hover {
+  background-color: none !important;
+}
+.dropdownInput input {
+  border: none;
+  outline: none;
+  padding: 0.25rem 0;
+  width: 80%;
+}
+.dropdownInput button {
+  border: none;
+  outline: none;
+  padding: 0.15rem 0.65rem;
+  background-color: #a0adb8;
   border-radius: 2px;
+  color: #fff;
+  font-weight: 500;
+}
+.itemsMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.25rem 0;
+}
+.ellipsis {
+  color: #000;
+  padding: 0 0.5rem;
+}
+.suggestedSpeakers {
+  font-size: 1.1rem;
+  color: grey !important;
+  font-weight: 500;
+  margin: 0.25rem 0;
+}
+.suggestedSpeakers:hover {
+  background: none !important;
 }
 .dropdownImage {
   margin-right: 0.5rem;
+}
+.image {
+  border: 2px solid grey;
+}
+.image:hover {
+  border: 2px solid #126fd6;
 }
 .dropdownItems {
   font-weight: 500;
@@ -149,6 +202,7 @@
 .dropdown > div:hover {
   background-color: #f0f0f0;
 }
+
 .rating {
   width: 100%;
   display: flex;
@@ -191,6 +245,139 @@
 .selected {
   color: #fb9c2c;
 }
+.speedDDTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  font-weight: 600;
+  padding: 1rem 0.5rem;
+}
+.cross {
+  font-size: 1rem;
+  cursor: pointer;
+}
+.mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+  padding: 0.25rem 0.5rem;
+  background: #fef7e0;
+  border: 2px solid #d8ab6b;
+  border-radius: 5px;
+}
+.icons {
+  margin-right: 0.25rem;
+}
+.speed {
+  font-size: 1rem;
+  border-bottom: 1px solid lightgrey;
+  padding: 1rem 0.5rem;
+  font-weight: 600;
+}
+.flex {
+  display: flex;
+}
+.bottomDD {
+  display: flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid lightgrey;
+  font-weight: 600;
+  padding: 0.5rem;
+}
+.dropDownMain {
+  width: 350px;
+  padding: 0.5rem;
+}
+.toggleItems {
+  margin: 0.5rem;
+}
+
+/* toggle switch  */
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.checkbox {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.checkbox:checked + .slider {
+  background-color: #2196f3;
+}
+
+.checkbox:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+.checkbox:checked + .slider:before {
+  transform: translateX(21px);
+}
+.highlightMain {
+  display: flex;
+  border-bottom: 1px solid lightgrey;
+  padding: 0.5rem 0;
+  align-items: center;
+  font-weight: 600;
+}
+.toggleUp {
+  margin-top: 1rem !important;
+}
+.editButtonMain {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.5rem 0.25rem;
+}
+.editButtonMain button {
+  box-shadow: 0 4px 6px 4px lightgrey;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  background-color: #fff;
+}
+.pencil {
+  margin-right: 0.5rem;
+}
+.textarea {
+  background-color: lightgrey;
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  border-radius: 2px;
+}
+.textarea:focus {
+  border: none;
+}
 @media only screen and (max-width: 720px) {
   .audioPlayerContainer {
     width: 60%;
@@ -206,4 +393,46 @@
     margin: 0 0.25rem;
     padding: 0.15rem;
   }
+  .dropdown {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    z-index: 1;
+    border-radius: 5px;
+    width: 200px;
+  }
+  .itemMain div {
+    font-size: 0.75rem !important;
+  }
+  .trasncriptItem {
+    padding: 1rem;
+  }
+  .dropDownMain {
+    width: 200px;
+    padding: 0.5rem;
+  }
+  .flex {
+    flex-direction: column;
+  }
+}
+/* ScrollToTop.module.css */
+.scrollToTopButton {
+  position: fixed;
+  top: 10%;
+  right: 50%;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  z-index: 99;
+  font-size: 1.25rem;
+}
+
+.scrollToTopButton:hover {
+  background-color: #0056b3;
 }
