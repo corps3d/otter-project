@@ -16,6 +16,7 @@ import {
   faPaperPlane,
   faFolder,
   faClock,
+  faArrowRight,
   faImage,
   faKeyboard,
   faTurnDown,
@@ -57,6 +58,13 @@ const Sidebar = () => {
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  const [isPModalOpen, setIsPModalOpen] = useState(false);
+
+  const setPMainPage = () => {
+    setIsPModalOpen(!isPModalOpen);
+  };
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -112,8 +120,23 @@ const Sidebar = () => {
 
           <div className="menu-bar">
             <div className="top-content">
-              <div className="account">
-                <div className="person" onClick={() => setMainPage("account")}>
+              <div>
+            <div className="account" onClick={() => setPMainPage()}>
+              <div className="person">
+                <img
+                  src={Person}
+                  alt="person"
+                  style={{ width: "50px", borderRadius: "50%" }}
+                />
+                <div className="person-details">
+                  <p style={{ fontSize: "1rem" }}>Selena Gomez</p>
+                  <p style={{ fontSize: ".75rem" }}>selena@gmail.com</p>
+                </div>
+              </div>
+            </div>
+            {isPModalOpen && (
+              <div className="pmodal">
+                <div className="person-pmodal" onClick={() => setPMainPage("account")}>
                   <img
                     src={Person}
                     alt="person"
@@ -124,7 +147,15 @@ const Sidebar = () => {
                     <p style={{ fontSize: ".75rem" }}>selena@gmail.com</p>
                   </div>
                 </div>
+                <div className="account-option" onClick={() => console.log("Account Settings clicked")}>
+                  Account Settings
+                </div>
+                <div className="logout-option" onClick={() => console.log("Logout clicked")}>
+                  Logout
+                </div>
               </div>
+            )}
+            </div>
 
               <div className="line"></div>
               <div className="workshops">

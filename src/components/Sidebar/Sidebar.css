@@ -487,7 +487,6 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 .dropdown-menu {
-  background-color: red;
   z-index: 1000;
   position: absolute;
   top: 100;
@@ -518,3 +517,41 @@
 .sidebar2 {
   margin-top: 50px;
 }
+
+
+/* Sidebar.css */
+
+.pmodal {
+  position: absolute;
+  left: 150%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.person-pmodal {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.person-pmodal img {
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.person-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-option,
+.logout-option {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
