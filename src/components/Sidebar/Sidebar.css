@@ -322,15 +322,25 @@
 .sidebar.close .first {
   margin-left: -0.25rem;
 }
-.sidebar.close .lastOne{
+.sidebar.close .lastOne {
   margin-left: 0.35rem;
 }
 .sidebar.close .last {
   margin-left: 0.25rem;
 }
+.nav-text {
+  margin-top: .25rem;
+}
 .sidebar.close .nav-text,
 .sidebar.close .second-menu-icons {
   display: none;
+}
+
+.dFlex a{
+ display:flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
 }
 .sidebar.close .hidden-icons {
   font-size: 1.5rem;
@@ -339,7 +349,7 @@
   cursor: pointer;
 }
 .sidebar.close .menu-icons {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   padding: 0.25rem 0.75rem;
 }
 .sidebar.close .menu-icons:hover {
@@ -395,7 +405,7 @@
 }
 .navbar-right {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   margin-right: 0.75rem;
 }
@@ -478,6 +488,7 @@
 }
 .dropdown-icons {
   margin-right: 0.5rem;
+  color: #3f4851;
 }
 .dropdown-items {
   padding: 0.25rem 0;
@@ -499,7 +510,6 @@
   }
   .navbar-right {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 50%;
     padding: 0 1rem;
@@ -518,12 +528,12 @@
   margin-top: 50px;
 }
 
-
 /* Sidebar.css */
 
 .pmodal {
   position: absolute;
-  left: 150%;
+  top: 25%;
+  left: 140%;
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 20px;
@@ -554,4 +564,3 @@
   cursor: pointer;
   margin-bottom: 10px;
 }
-
