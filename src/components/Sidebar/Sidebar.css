@@ -335,13 +335,6 @@
 .sidebar.close .second-menu-icons {
   display: none;
 }
-
-.dFlex a{
- display:flex;
- justify-content: center;
- align-items: center;
- flex-direction: column;
-}
 .sidebar.close .hidden-icons {
   font-size: 1.5rem;
   display: block;
