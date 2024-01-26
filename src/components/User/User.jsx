@@ -20,7 +20,7 @@ const User = () => {
           <div className={userStyles.dataFlex}>
             <div className={userStyles.detailItems}>
               <p>Email</p>
-              <p>hammas@gmail.com</p>
+              <p>salena@gmail.com</p>
             </div>
             <div className={userStyles.detailItems}>
               <p>Role</p>
@@ -30,7 +30,7 @@ const User = () => {
           <div className={userStyles.dataFlex}>
             <div className={userStyles.detailItems}>
               <p>Password</p>
-              <p>hammas@gmail.com</p>
+              <p>salenagomez</p>
             </div>
             <div className={userStyles.detailItems}>
               <p>Department</p>
