@@ -1,7 +1,7 @@
 import React from "react";
 
 const ExportIcon = (props) => {
-  const { cls } = props;
+  const { cls, color, width } = props;
   return (
     <>
       <mat-icon
@@ -13,8 +13,8 @@ const ExportIcon = (props) => {
         data-mat-icon-name="icon-export-3.0"
       >
         <svg
-          width="17px"
-          height="17px"
+          width={width ? width : "17px"}
+          height={width ? width : "17px"}
           viewBox="0 0 16 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -22,11 +22,12 @@ const ExportIcon = (props) => {
           preserveAspectRatio="xMidYMid meet"
           focusable="false"
           className={cls}
+          color={color}
         >
           <g clip-path="url('/u/Wl5sq6-Oft3mNKzynlVxA7PaCus?view=transcript&amp;tab=chat#clip0_1867_88299')">
             <path
               d="M8.21582 10.1831L8.21582 0.999772"
-              stroke="#05294B"
+              stroke={color ? color : "#05294B"}
               stroke-width="1.25"
               stroke-miterlimit="10"
               stroke-linecap="round"

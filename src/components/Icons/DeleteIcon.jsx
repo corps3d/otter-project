@@ -1,7 +1,7 @@
 import React from "react";
 
 const DeleteIcon = (props) => {
-  const { cls } = props;
+  const { cls, width, color } = props;
   return (
     <>
       <mat-icon
@@ -13,8 +13,8 @@ const DeleteIcon = (props) => {
         data-mat-icon-name="otter-nav-delete-3.0"
       >
         <svg
-          width="17px"
-          height="17px"
+          width={width ? width : "17px"}
+          height={width ? width : "17px"}
           viewBox="0 0 16 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -22,6 +22,7 @@ const DeleteIcon = (props) => {
           preserveAspectRatio="xMidYMid meet"
           focusable="false"
           className={cls}
+          color={color}
         >
           <path
             d="M2 4.16699L14 4.16699"

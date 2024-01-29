@@ -3,16 +3,14 @@ import "./Sidebar.css"; // Make sure to have your CSS in Dashboard.css
 import Logo from "../../assets/otter.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFileLines,
   faChevronUp,
   faPlus,
   faMagnifyingGlass,
   faFolder,
-  faClock,
-  faImage,
   faEllipsisVertical,
   faBars,
   faX,
+  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { Modal, Form, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import styles from "../../components/Summary/Summary.module.css";
@@ -51,6 +49,8 @@ import Highlights from "../RightSideInner/Highlights";
 import ClockIcon from "../Icons/ClockIcon";
 import ImageIcon from "../Icons/ImageIcon";
 import CopyIcon from "../Icons/CopyIcon";
+import LinkIcon from "../Icons/LinkIcon";
+import SettingIcon from "../Icons/SettingIcon";
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(true);
@@ -66,6 +66,15 @@ const Sidebar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isPModalOpen, setIsPModalOpen] = useState(false);
   const [rightSideInner, setRightSideInner] = useState("summary");
+  const [showShareModal, setShowShareModal] = useState(false);
+  const handleShareClick = () => {
+    setShowShareModal(true);
+  };
+
+  const handleCloseShareModal = () => {
+    setShowShareModal(false);
+  };
+
   const setPMainPage = () => {
     setIsPModalOpen(!isPModalOpen);
   };
@@ -397,11 +406,86 @@ const Sidebar = () => {
                 <Tooltip id="pencil-tooltip">Private to only me</Tooltip>
               }
             >
-              <button className="share">
+              <button className="share" onClick={handleShareClick}>
                 <LockIcon />
                 <span>Share</span>
               </button>
             </OverlayTrigger>
+            <Modal
+              show={showShareModal}
+              onHide={handleCloseShareModal}
+              centered
+            >
+              <Modal.Header closeButton>
+                <Modal.Title style={{ fontSize: "1.25rem", fontWeight: "600" }}>
+                  Share
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body
+                className="delete-modal-body"
+                style={{ width: "100%", padding: "1.5rem " }}
+              >
+                <div className="delete-modal-top">
+                  <div>
+                    <input type="text" placeholder="Add names or emails." />
+                  </div>
+                  <div>
+                    <select name="Collaborator" id="txt">
+                      <option value="Collaborator">Collaborator</option>
+                      <option value="Viewer">Viewer</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="delete-modal-bottom">
+                  <div>
+                    <div className="account">
+                      <div className="person">
+                        <img
+                          src={Person}
+                          alt="person"
+                          style={{ width: "50px", borderRadius: "50%" }}
+                        />
+                        <div className="person-details">
+                          <p style={{ fontSize: "1rem" }}>Selena Gomez</p>
+                          <p style={{ fontSize: ".75rem" }}>selena@gmail.com</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>Owner</div>
+                </div>
+              </Modal.Body>
+              <Modal.Footer
+                className="d-flex flex-column justify-content-between"
+                style={{ padding: "0.5rem 1.25rem" }}
+              >
+                <div className="modal-bottom-top">
+                  <div className="modal-bottom-top-inner">
+                    <div>
+                      <LockIcon />
+                    </div>
+                    <div>Restricted</div>
+                    <div style={{ marginLeft: ".25rem" }}>
+                      <FontAwesomeIcon icon={faChevronDown} />
+                    </div>
+                  </div>
+                  <div>Only added people and channels can access</div>
+                </div>
+                <div className="modal-bottom-bottom">
+                  <div>
+                    <div className="link-icon-btn">
+                      <div>
+                        <LinkIcon />
+                      </div>
+                      <div>Copylink</div>
+                    </div>
+                  </div>
+                  <div style={{ cursor: "pointer" }}>
+                    <SettingIcon />
+                  </div>
+                </div>
+              </Modal.Footer>
+            </Modal>
             <DropdownToggle />
 
             <OverlayTrigger
@@ -544,7 +628,7 @@ const Sidebar = () => {
             />
           </div>
         ) : mainPage === "allConversations" ? (
-          <Conversations
+          <SingleConversation
             margin={
               isSidebarOpen
                 ? "17%"
@@ -556,6 +640,9 @@ const Sidebar = () => {
             }
             display={isMobile && isSidebarOpen ? "none" : ""}
             padding={isMobile && "0"}
+            value="singleConservation"
+            click={() => setMainPage("conservation")}
+            item="All"
           />
         ) : mainPage === "singleConservation" ? (
           <SingleConversation
@@ -572,6 +659,7 @@ const Sidebar = () => {
             padding={isMobile && "0"}
             value="singleConservation"
             click={() => setMainPage("conservation")}
+            item="My"
           />
         ) : (
           ""

@@ -7,11 +7,20 @@ p {
   color: #5f7282;
 }
 .itemMain {
-  border: 1px solid #5f7282;
-  border-radius: 20px;
   padding: 1rem;
   margin: 1rem 0;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+.innerTopItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.itemMainTop {
+  display: flex;
+  flex-direction: column;
 }
 .itemTop {
   display: flex;
@@ -35,4 +44,30 @@ p {
   margin-right: 0.5rem;
   font-size: 0.9rem;
   color: #5f7282;
+}
+.checkbox {
+  margin-right: 1rem;
+}
+.checkbox input {
+  width: 20px;
+  height: 20px;
+}
+.optionsIconsMain {
+  display: flex;
+  align-items: center;
+  color: #126fd6;
+}
+.optionsIconsMain input {
+  width: 16px;
+  height: 16px;
+}
+.optionsIconsMain div {
+  display: flex;
+  margin: 0 0.5rem;
+}
+.point {
+  cursor: pointer;
+}
+.point div:nth-child(2) {
+  margin-left: -0.25rem;
 }

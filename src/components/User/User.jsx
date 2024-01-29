@@ -1,11 +1,9 @@
-// eslint-disable-next-line no-unused-vars
 import React from "react";
 import userStyles from "./User.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import UserImage from "../../assets/person.png";
 const User = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { display, margin } = props;
   return (
     <div
@@ -26,7 +24,7 @@ const User = (props) => {
           <div className={userStyles.dataFlex}>
             <div className={userStyles.detailItems}>
               <p>Email</p>
-              <p>salena@gmail.com</p>
+              <p>hammas@gmail.com</p>
             </div>
             <div className={userStyles.detailItems}>
               <p>Role</p>
@@ -36,7 +34,7 @@ const User = (props) => {
           <div className={userStyles.dataFlex}>
             <div className={userStyles.detailItems}>
               <p>Password</p>
-              <p>salenagomez</p>
+              <p>hammas@gomez.com</p>
             </div>
             <div className={userStyles.detailItems}>
               <p>Department</p>
@@ -72,7 +70,6 @@ const User = (props) => {
 
 export default User;
 const MoreDetails = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { title, value } = props;
   return (
     <>

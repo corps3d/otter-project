@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShareIcon = ({ cls, width, style }) => {
+const ShareIcon = ({ cls, width, style, color }) => {
   return (
     <span
       role="img"
@@ -17,7 +17,7 @@ const ShareIcon = ({ cls, width, style }) => {
         fit=""
         preserveAspectRatio="xMidYMid meet"
         focusable="false"
-        color="#3f4851"
+        color={color ? color : "#3f4851"}
         style={style}
       >
         <g

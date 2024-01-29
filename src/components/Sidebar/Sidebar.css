@@ -774,3 +774,66 @@
 .mainSidebar2 {
   width: 90%;
 }
+.modal-bottom-top,
+.modal-bottom-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.modal-bottom-top div:nth-child(1) {
+  font-size: 0.95rem;
+}
+.modal-bottom-top div:nth-child(2) {
+  font-size: 0.85rem;
+  color: #3f4851;
+}
+.link-icon-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgrey;
+  padding: 0.35rem 0.75rem;
+  border-radius: 5px;
+  color: #126fd6;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.link-icon-btn div:nth-child(1) {
+  margin: 0 0.5rem;
+}
+.link-icon-btn div:nth-child(2) {
+  letter-spacing: 0.1cap;
+}
+.modal-bottom-top-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.delete-modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 0.25rem;
+}
+.delete-modal-top input {
+  width: 100%;
+  padding: 0.25rem 4rem 0.25rem 0.25rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+.delete-modal-top select {
+  border: none !important;
+}
+.delete-modal-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
