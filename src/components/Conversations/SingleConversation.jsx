@@ -38,7 +38,7 @@ const ConCom = ({ click }) => {
           </div>
         </div>
         <div>
-          <DropdownToggle />
+          <DropdownToggle keyboardShortcut={true}/>
         </div>
       </div>
       <div className={singleStyles.itemBottom} onClick={click}>

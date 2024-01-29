@@ -21,7 +21,7 @@ import ExportIcon from "../Icons/ExportIcon";
 import DeleteIcon from "../Icons/DeleteIcon";
 import KeyboardModal from "../KeyboardModal";
 
-const DropdownToggle = () => {
+const DropdownToggle = ( { keyboardShorcut } ) => {
   const [inputValue, setInputValue] = useState("");
   const [values, setValues] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -123,14 +123,15 @@ const DropdownToggle = () => {
             />
           </OverlayTrigger>
         </Dropdown.Toggle>
-
+        
         <Dropdown.Menu className="dropdown-setting">
+        {!keyboardShorcut && ( 
           <Dropdown.Item className="dropdownItemHover">
             <div className="dropdown-items" onClick={handleOpen}>
               <KeyboardIcon cls="dropdown-icons" />
               Keyboard Shortcuts
             </div>
-          </Dropdown.Item>
+          </Dropdown.Item>)}
           <Dropdown.Item
             className="dropdownItemHover"
             onClick={handleMoveClick}
