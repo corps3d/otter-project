@@ -1,7 +1,7 @@
 import React from "react";
 import homeStyles from "./HomePage.module.css";
 const HomePage = (props) => {
-  const { margin, display } = props;
+  const { margin, display, marginTop } = props;
   return (
     <>
       <div
@@ -19,7 +19,10 @@ const HomePage = (props) => {
 export default HomePage;
 const HomeContent = () => {
   return (
-    <div style={{ marginBottom: "2rem" }} className={homeStyles.homeMain}>
+    <div
+      style={{ marginBottom: "2rem", marginTop: "6rem" }}
+      className={homeStyles.homeMain}
+    >
       <p className={homeStyles.date}>Tuesday 21,Feb</p>
       <div className={homeStyles.inner}>
         <p className={homeStyles.title}>Overrated is overrated</p>

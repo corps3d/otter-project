@@ -33,7 +33,7 @@
   background-color: #f4f4f4;
 }
 .trasncriptItem:hover .hover {
-  display: block;
+  display: flex !important;
 }
 .top {
   display: flex;
@@ -63,22 +63,24 @@
   margin: 1rem 0;
 }
 .hover {
-  display: none;
+  display: none !important;
   position: absolute;
   right: 0;
   top: 0;
+  display: flex;
   border-radius: 2px;
   background-color: #fff;
   box-shadow: 0 4px 6px 4px lightgrey;
   padding: 0.25rem;
 }
-.hoverIcons {
-  margin: 0 0.5rem;
+.hoverMyIcons {
+  margin: 0 0.25rem;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 50%;
 }
-.hoverIcons:hover {
+
+.hoverMyIcons:hover {
   background: rgba(0, 0, 0, 0.25);
 }
 .audioPlayerContainer {
@@ -87,7 +89,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 88%;
   background-color: #fff;
   padding: 10px;
   box-shadow: 0 4px 6px 4px lightgrey;
@@ -123,9 +125,14 @@
 .controlsMain {
   display: flex;
 }
+.mainControlInner {
+  display: flex;
+  justify-content: center;
+}
 .audioControls:hover {
   background-color: rgba(0, 0, 0, 0.25);
 }
+
 .dropdown {
   position: absolute;
   top: 35%;
@@ -236,8 +243,12 @@
 .hoverIcons {
   color: gray;
   cursor: pointer;
+  margin-right: 1.25rem;
+  cursor: pointer;
 }
-
+.hoverIcons:hover {
+  background-color: transparent;
+}
 .hovered {
   color: #fb9c2c;
 }
@@ -358,34 +369,43 @@
   display: flex;
   justify-content: flex-end;
   margin: 0.5rem 0.25rem;
+  position: sticky;
+  top: 130px;
+  z-index: 999;
 }
 .editButtonMain button {
   box-shadow: 0 4px 6px 4px lightgrey;
   font-weight: 600;
   padding: 0.25rem 0.75rem;
   background-color: #fff;
+  margin-right: 1rem;
 }
 .pencil {
   margin-right: 0.5rem;
 }
 .textarea {
-  background-color: lightgrey;
+  background-color: transparent;
   border: none;
   outline: none;
   padding: 0.25rem;
   border-radius: 2px;
+  border: 1px solid lightgrey;
+  resize: none;
 }
 .textarea:focus {
   border: none;
 }
+.controlsIcons {
+  margin: 0 0.5rem;
+}
 @media only screen and (max-width: 720px) {
+  .hover {
+    flex-direction: column;
+  }
   .audioPlayerContainer {
     width: 60%;
   }
-  .hoverIcons {
-    margin: 0rem;
-    padding: 0.25rem;
-  }
+
   .controlsMain {
     flex-direction: column;
   }
@@ -416,6 +436,12 @@
   }
   .flex {
     flex-direction: column;
+  }
+  .editButtonMain {
+    top: 80px;
+  }
+  .editButtonMain button {
+    margin-right: 0rem;
   }
 }
 /* ScrollToTop.module.css */

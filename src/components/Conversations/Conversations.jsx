@@ -3,14 +3,14 @@ import homeStyles from "./Conversations.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 const Conversations = (props) => {
-  const { margin, display } = props;
+  const { margin, display, padding } = props;
   return (
     <>
       <div
         className={homeStyles.main}
-        style={{ marginLeft: margin, display: display }}
+        style={{ marginLeft: margin, display: display, padding: padding }}
       >
-        <h3 style={{ marginTop: "2.5rem" }}>All Conversations</h3>
+        <h3 style={{ marginTop: "1.5rem" }}>All Conversations</h3>
         <HomeContent />
         <HomeContent />
         <HomeContent />

@@ -158,6 +158,7 @@ h2 {
   .priceMain {
     display: flex;
     flex-direction: column;
+    margin-right: 2rem;
   }
   .cardItemMain {
     width: 100%;

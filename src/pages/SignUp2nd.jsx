@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginSignupNavbar from "../components/LoginSignupNavbar/LoginSignupNavbar";
 import styles from "../components/LoginSignupNavbar/LoginSignupNavbar.module.css";
 import Chat from "../components/LoginSignupNavbar/Chat";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 const SignUp2nd = () => {
+  const [inputValue, setInputValue] = useState("");
   return (
     <div style={{ position: "relative", height: "100vh" }}>
       <Chat />
@@ -43,7 +46,7 @@ const SignUp2nd = () => {
                 <div className={styles.line}></div>
               </div>
               <div className={styles.linkInput}>
-                <span>
+                <div>
                   <svg
                     width="20"
                     height="20"
@@ -66,11 +69,23 @@ const SignUp2nd = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                </span>
-                <input
-                  type="text"
-                  placeholder="Place a public link from Youtube, Google Drive, etc."
-                />
+                </div>
+                <div className={styles.textBoxDiv}>
+                  <input
+                    type="text"
+                    placeholder="Place a public link from Youtube, Google Drive, etc."
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <FontAwesomeIcon
+                    icon={faArrowRight}
+                    className={styles.arrowIcon}
+                    color="#667085"
+                    style={{ display: inputValue && "flex", cursor: "pointer" }}
+                  />
+                </div>
               </div>
               <p style={{ margin: "1rem 0" }}>Don't have any file ready?</p>
               <Link to="/loading">

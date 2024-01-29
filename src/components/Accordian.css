@@ -3,7 +3,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0.25rem;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #5f7282;
+  width: 100%;
+  color: #5f7282;
 }
 .top div {
   font-size: 1rem;

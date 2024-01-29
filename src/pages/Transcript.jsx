@@ -22,6 +22,16 @@ import Person from "../assets/person.png";
 import Person1 from "../assets/otter.png";
 import Person2 from "../assets/microsoft.png";
 import AudioMusic from "../assets/295.mp3";
+import PencilIcon from "../components/Icons/PencilIcon";
+import CommentIcon from "../components/Icons/CommentIcon";
+import PlayIcon from "../components/Icons/PlayIcon";
+import PauseIcon from "../components/Icons/PauseIcon";
+import BackwardIcon from "../components/Icons/BackwardIcon";
+import ForwardIcon from "../components/Icons/ForwardIcon";
+import ImageIcon from "../components/Icons/ImageIcon";
+import EditBtnIcon from "../components/Icons/EditBtnIcon";
+import CopyIcon from "../components/Icons/CopyIcon";
+import ShareIcon from "../components/Icons/ShareIcon";
 const Transcript = (props) => {
   const { width } = props;
   const audioRef = useRef(null);
@@ -147,10 +157,7 @@ const Transcript = (props) => {
     <>
       <div className={transcriptStyles.editButtonMain}>
         <button onClick={handleEditButtonClick} style={{ color: "#000" }}>
-          <FontAwesomeIcon
-            icon={faPencil}
-            className={transcriptStyles.pencil}
-          />
+          <EditBtnIcon cls={transcriptStyles.pencil} />
           {isEditingMode ? "Done" : "Edit"}
         </button>
       </div>
@@ -231,7 +238,8 @@ const Transcript = (props) => {
                 <input
                   type="range"
                   value={(currentTime / audioRef.current?.duration) * 100 || 0}
-                  onChange={() => {}} // No need to update the state during the hover
+                  onChange={() => {}}
+                  className={transcriptStyles.inputRange}
                 />
               </OverlayTrigger>
 
@@ -245,15 +253,13 @@ const Transcript = (props) => {
                     overlay={
                       <Tooltip id="pencil-tooltip">Rewind 5 seconds</Tooltip>
                     }
+                    className={transcriptStyles.mainControlInner}
                   >
                     <button
                       onClick={() => skipTime(-5)}
                       className={transcriptStyles.audioControls}
                     >
-                      <FontAwesomeIcon
-                        icon={faBackward}
-                        className={transcriptStyles.playPauseIcons}
-                      />
+                      <BackwardIcon cls={transcriptStyles.playPauseIcons} />
                     </button>
                   </OverlayTrigger>
 
@@ -267,17 +273,11 @@ const Transcript = (props) => {
                     >
                       {isPlaying ? (
                         <>
-                          <FontAwesomeIcon
-                            icon={faPause}
-                            className={transcriptStyles.playPauseIcons}
-                          />
+                          <PauseIcon cls={transcriptStyles.playPauseIcons} />
                         </>
                       ) : (
                         <>
-                          <FontAwesomeIcon
-                            icon={faPlay}
-                            className={transcriptStyles.playPauseIcons}
-                          />
+                          <PlayIcon cls={transcriptStyles.playPauseIcons} />
                         </>
                       )}
                     </button>
@@ -294,10 +294,7 @@ const Transcript = (props) => {
                       onClick={() => skipTime(+5)}
                       className={transcriptStyles.audioControls}
                     >
-                      <FontAwesomeIcon
-                        icon={faForward}
-                        className={transcriptStyles.playPauseIcons}
-                      />
+                      <ForwardIcon cls={transcriptStyles.playPauseIcons} />
                     </button>
                   </OverlayTrigger>
                 </div>
@@ -309,7 +306,7 @@ const Transcript = (props) => {
                       style={{
                         background: "transparent",
                         border: "none",
-                        color: "#000",
+                        color: "#05294b",
                       }}
                     >
                       {selectedSpeed}x
@@ -367,33 +364,36 @@ const Transcript = (props) => {
                   </Dropdown>
                 </div>
               </div>
-              <div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <OverlayTrigger
                   placement="top"
                   overlay={<Tooltip id="pencil-tooltip">Edit</Tooltip>}
                 >
-                  <FontAwesomeIcon
-                    icon={faPencil}
-                    className={transcriptStyles.hoverIcons}
-                  />
+                  <div class={transcriptStyles.controlsIcons}>
+                    <PencilIcon />
+                  </div>
                 </OverlayTrigger>
                 <OverlayTrigger
                   placement="top"
                   overlay={<Tooltip id="pencil-tooltip">Comment</Tooltip>}
                 >
-                  <FontAwesomeIcon
-                    icon={faPager}
-                    className={transcriptStyles.hoverIcons}
-                  />
+                  <div class={transcriptStyles.controlsIcons}>
+                    <CommentIcon color="#05294b" />
+                  </div>
                 </OverlayTrigger>
                 <OverlayTrigger
                   placement="top"
                   overlay={<Tooltip id="pencil-tooltip">Image</Tooltip>}
                 >
-                  <FontAwesomeIcon
-                    icon={faImage}
-                    className={transcriptStyles.hoverIcons}
-                  />
+                  <div class={transcriptStyles.controlsIcons}>
+                    <ImageIcon color="#05294b" />
+                  </div>
                 </OverlayTrigger>
               </div>
             </div>
@@ -554,41 +554,36 @@ const TranscriptItem = ({ isEditingMode }) => {
             placement="top"
             overlay={<Tooltip id="pencil-tooltip">Highlight</Tooltip>}
           >
-            <FontAwesomeIcon
-              icon={faPencil}
-              className={transcriptStyles.hoverIcons}
-              onClick={handleEditStart}
-            />
+            <div className={transcriptStyles.hoverMyIcons}>
+              <PencilIcon oc={handleEditStart} />
+            </div>
           </OverlayTrigger>
 
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip id="message-tooltip">Comment</Tooltip>}
           >
-            <FontAwesomeIcon
-              icon={faMessage}
-              className={transcriptStyles.hoverIcons}
-            />
+            <div className={transcriptStyles.hoverMyIcons}>
+              <CommentIcon />
+            </div>
           </OverlayTrigger>
 
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip id="pager-tooltip">Copy</Tooltip>}
           >
-            <FontAwesomeIcon
-              icon={faPager}
-              className={transcriptStyles.hoverIcons}
-            />
+            <div className={transcriptStyles.hoverMyIcons}>
+              <CopyIcon />
+            </div>
           </OverlayTrigger>
 
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip id="share-tooltip">Share</Tooltip>}
           >
-            <FontAwesomeIcon
-              icon={faShareNodes}
-              className={transcriptStyles.hoverIcons}
-            />
+            <div className={transcriptStyles.hoverMyIcons}>
+              <ShareIcon />
+            </div>
           </OverlayTrigger>
         </div>
       </div>

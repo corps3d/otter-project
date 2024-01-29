@@ -17,6 +17,7 @@ const WorkshopIcon = () => {
           fit=""
           preserveAspectRatio="xMidYMid meet"
           focusable="false"
+          style={{ color: "#126fd6" }}
         >
           <g clipPath="url('/u/vwA7TRwtnlmULEpT8F-HID1JsXE?tab=chat#clip0_2219_213983')">
             <path

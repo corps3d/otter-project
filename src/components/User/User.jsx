@@ -3,9 +3,13 @@ import userStyles from "./User.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import UserImage from "../../assets/person.png";
-const User = () => {
+const User = (props) => {
+  const { display, margin } = props;
   return (
-    <div className={userStyles.wrapper}>
+    <div
+      className={userStyles.wrapper}
+      style={{ display: display, marginLeft: margin }}
+    >
       <h2 className={userStyles.mainHeading}>General</h2>
       <div className={userStyles.userCard}>
         <div className={userStyles.top}>
@@ -20,7 +24,7 @@ const User = () => {
           <div className={userStyles.dataFlex}>
             <div className={userStyles.detailItems}>
               <p>Email</p>
-              <p>salena@gmail.com</p>
+              <p>hammas@gmail.com</p>
             </div>
             <div className={userStyles.detailItems}>
               <p>Role</p>
@@ -30,7 +34,7 @@ const User = () => {
           <div className={userStyles.dataFlex}>
             <div className={userStyles.detailItems}>
               <p>Password</p>
-              <p>salenagomez</p>
+              <p>hammas@gomez.com</p>
             </div>
             <div className={userStyles.detailItems}>
               <p>Department</p>

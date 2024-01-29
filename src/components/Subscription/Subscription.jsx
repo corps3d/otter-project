@@ -3,7 +3,7 @@ import styles from "./Subscription.module.css";
 import SubscriptionCard from "../SubscriptionCard/SubscriptionCard";
 
 const Subscription = (props) => {
-  const { display, margin } = props;
+  const { display, margin,marginTop } = props;
   const [isChecked, setChecked] = useState(false);
 
   const handleToggle = () => {
@@ -14,7 +14,7 @@ const Subscription = (props) => {
       className={`p-4 ${styles.planMain}`}
       style={{ display: display, marginLeft: margin }}
     >
-      <h2>Choose Your Plan</h2>
+      <h2 style={{ marginTop: marginTop }}>Choose Your Plan</h2>
       <div className={styles.switchMain}>
         <div className={styles.toggleItems}>Monthly</div>
         <div className={styles.toggleItems}>

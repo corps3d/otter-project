@@ -7,13 +7,13 @@ const Accordian = () => {
     <div>
       <div className="top">
         <div>Collapse All</div>
-        <div>
+        <div style={{ display: "flex" }}>
           <FontAwesomeIcon icon={faPager} className="accordian-icon" />
           <FontAwesomeIcon icon={faLink} className="accordian-icon" />
         </div>
       </div>
       <div className="accordian-wrapper">
-        <div class="accordion" id="accordionExample">
+        <div class="accordion" id="accordionExample" style={{ width: "100%" }}>
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
               <button
