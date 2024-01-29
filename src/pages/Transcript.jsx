@@ -238,7 +238,13 @@ const Transcript = (props) => {
                 <input
                   type="range"
                   value={(currentTime / audioRef.current?.duration) * 100 || 0}
-                  onChange={() => {}}
+                  onChange={(e) => {
+                    const newPosition = parseInt(e.target.value, 10);
+                    const newTime =
+                      (newPosition / 100) * audioRef.current?.duration;
+                    setCurrentTime(newTime);
+                    audioRef.current.currentTime = newTime;
+                  }}
                   className={transcriptStyles.inputRange}
                 />
               </OverlayTrigger>
@@ -534,6 +540,12 @@ const TranscriptItem = ({ isEditingMode }) => {
             )}
           </div>
           <div className={transcriptStyles.time}>0:00</div>
+          <div style={{ cursor: "pointer" }}>
+            <FontAwesomeIcon
+              icon={faPlay}
+              style={{ marginLeft: ".5rem", color: "grey" }}
+            />
+          </div>
         </div>
         <div className={transcriptStyles.paragraph}>
           {isEditing || isEditingMode ? (

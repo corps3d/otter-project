@@ -218,7 +218,6 @@ const Sidebar = () => {
                   </li>
                   <li
                     className={`nav-link ${!isSidebarOpen && "dFlex"}`}
-                    // onClick={() => setMainPage("conservation")}
                     onClick={() => setMainPage("singleConservation")}
                   >
                     <a href="#">
@@ -666,7 +665,9 @@ const Sidebar = () => {
                 {activeSection === "chat" && (
                   <Chat display={!isRightSidebarOpen && "none"} />
                 )}
-                {activeSection === "outline" && <Accordian />}
+                {activeSection === "outline" && (
+                  <Accordian display={!isRightSidebarOpen && "none"} />
+                )}
                 {activeSection === "comments" && <div></div>}
               </>
             )}

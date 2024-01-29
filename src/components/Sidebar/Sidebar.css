@@ -630,6 +630,9 @@
   .export-modal-right {
     width: 100% !important;
   }
+  .home {
+    width: 88% !important;
+  }
 }
 .sidebar,
 .navbar,

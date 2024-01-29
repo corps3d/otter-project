@@ -2,9 +2,9 @@ import React from "react";
 import "./Accordian.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPager, faLink } from "@fortawesome/free-solid-svg-icons";
-const Accordian = () => {
+const Accordian = ({ display }) => {
   return (
-    <div>
+    <div style={{ display: display }}>
       <div className="top">
         <div>Collapse All</div>
         <div style={{ display: "flex" }}>

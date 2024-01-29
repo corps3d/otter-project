@@ -38,7 +38,9 @@ const Login = () => {
                 <p className={styles.inputTextbox}>Email</p>
               </FormGroup>
               <div className={styles.forgetPass}>
-                <a href="#forgot-password">Forgot your password?</a>
+                <Link to="/forget">
+                  <a href="#forgot-password">Forgot your password?</a>
+                </Link>
               </div>
               <div style={{ width: "100%" }}>
                 <Link to="/main">

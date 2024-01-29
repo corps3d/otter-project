@@ -19,6 +19,7 @@ import KeyboardIcon from "../Icons/KeyboardIcon";
 import MoveIcon from "../Icons/MoveIcon";
 import ExportIcon from "../Icons/ExportIcon";
 import DeleteIcon from "../Icons/DeleteIcon";
+import KeyboardModal from "../KeyboardModal";
 
 const DropdownToggle = () => {
   const [inputValue, setInputValue] = useState("");
@@ -31,6 +32,9 @@ const DropdownToggle = () => {
   const [isChecked, setChecked] = useState(false);
   const [isChecked1, setChecked1] = useState(false);
   const [isChecked2, setChecked2] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const handleToggle = () => {
     setChecked(!isChecked);
   };
@@ -104,6 +108,7 @@ const DropdownToggle = () => {
 
   return (
     <>
+      <KeyboardModal open={open} handleClose={handleClose} />
       <Dropdown>
         <Dropdown.Toggle style={{ background: "transparent", border: "none" }}>
           <OverlayTrigger
@@ -121,7 +126,7 @@ const DropdownToggle = () => {
 
         <Dropdown.Menu className="dropdown-setting">
           <Dropdown.Item className="dropdownItemHover">
-            <div className="dropdown-items">
+            <div className="dropdown-items" onClick={handleOpen}>
               <KeyboardIcon cls="dropdown-icons" />
               Keyboard Shortcuts
             </div>
