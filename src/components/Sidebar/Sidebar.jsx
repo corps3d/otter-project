@@ -389,7 +389,7 @@ const Sidebar = () => {
         <div
           className="navbar"
           style={{
-            marginLeft: isSidebarOpen && "15%",
+            marginLeft: isSidebarOpen && !isMobile && "250px",
             width: isSidebarOpen ? "84%" : isMobile ? "100%" : "",
           }}
         >
@@ -631,9 +631,9 @@ const Sidebar = () => {
           <SingleConversation
             margin={
               isSidebarOpen
-                ? "17%"
+                ? "250px"
                 : !isSidebarOpen && !isMobile
-                ? "6%"
+                ? "85px"
                 : isMobile
                 ? "5px"
                 : ""
@@ -648,9 +648,9 @@ const Sidebar = () => {
           <SingleConversation
             margin={
               isSidebarOpen
-                ? "17%"
+                ? "250px"
                 : !isSidebarOpen && !isMobile
-                ? "6%"
+                ? "85px"
                 : isMobile
                 ? "5px"
                 : ""

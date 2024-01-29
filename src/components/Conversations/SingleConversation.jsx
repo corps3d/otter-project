@@ -114,6 +114,7 @@ const ConCom = ({ click, checkedVal, parentCheck }) => {
 
 const OptionsIcons = ({ isChecked, setIsChecked }) => {
   return (
+    <>
     <div className={singleStyles.optionsIconsMain}>
       <div>
         <input
@@ -144,5 +145,6 @@ const OptionsIcons = ({ isChecked, setIsChecked }) => {
       </div>
     </div>
     
+    </>
   );
 };
