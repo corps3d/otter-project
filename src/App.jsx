@@ -18,6 +18,25 @@ function App() {
         <Route path="/upload" element={<SignUp2nd />} />
         <Route path="/loading" element={<SignUp3rd />} />
         <Route path="/forget" element={<ForgetPassword />} />
+        <Route path="/payment" element={<Sidebar component={"upgrade"} />} />
+        <Route path="/home" element={<Sidebar component={"home"} />} />
+        <Route path="/account" element={<Sidebar component={"account"} />} />
+        <Route
+          path="/main/conversation"
+          element={<Sidebar component={"singleConversation"} />}
+        />
+        <Route
+          path="/main/conversations"
+          element={<Sidebar component={"allConversations"} />}
+        />
+        <Route
+          path="/main/conversation/summary"
+          element={<Sidebar component={"summary"} />}
+        />
+        <Route
+          path="/main/conversation/transcript"
+          element={<Sidebar component={"transcript"} />}
+        />
       </Routes>
     </Router>
   );

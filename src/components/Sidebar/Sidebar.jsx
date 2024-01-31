@@ -24,7 +24,6 @@ import Subscription from "../Subscription/Subscription";
 import HomePage from "../HomePage/HomePage";
 import SidebarIcon from "../SidebarIcon";
 import Top from "../Top";
-import Conversations from "../Conversations/Conversations";
 import HomeIcon from "../Icons/HomeIcon";
 import AllConversationIcon from "../Icons/AllConversationIcon";
 import AppIcon from "../Icons/AppIcon";
@@ -51,7 +50,8 @@ import ImageIcon from "../Icons/ImageIcon";
 import CopyIcon from "../Icons/CopyIcon";
 import LinkIcon from "../Icons/LinkIcon";
 import SettingIcon from "../Icons/SettingIcon";
-const Sidebar = () => {
+import { Link } from "react-router-dom";
+const Sidebar = ({ component }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState("chat");
@@ -67,6 +67,14 @@ const Sidebar = () => {
   const [isPModalOpen, setIsPModalOpen] = useState(false);
   const [rightSideInner, setRightSideInner] = useState("summary");
   const [showShareModal, setShowShareModal] = useState(false);
+
+  useEffect(() => {
+    component &&
+      (component == "summary" || component == "transcript"
+        ? setPage(component)
+        : setMainPage(component));
+  }, [component]);
+
   const handleShareClick = () => {
     setShowShareModal(true);
   };
@@ -178,13 +186,17 @@ const Sidebar = () => {
                           alt="person"
                           style={{ width: "50px", borderRadius: "50%" }}
                         />
-                        <div className="person-details">
-                          <p style={{ fontSize: "1rem" }}>Selena Gomez</p>
-                          <p style={{ fontSize: ".75rem" }}>selena@gmail.com</p>
-                          <p style={{ color: "#126fd6", fontWeight: "600" }}>
-                            Upgrade Plan
-                          </p>
-                        </div>
+                        <Link to="/account" className="link-styling">
+                          <div className="person-details">
+                            <p style={{ fontSize: "1rem" }}>Selena Gomez</p>
+                            <p style={{ fontSize: ".75rem" }}>
+                              selena@gmail.com
+                            </p>
+                            <p style={{ color: "#126fd6", fontWeight: "600" }}>
+                              Upgrade Plan
+                            </p>
+                          </div>
+                        </Link>
                       </div>
                       <div
                         className="account-option"
@@ -222,12 +234,14 @@ const Sidebar = () => {
                   >
                     <a href="#">
                       <HomeIcon margin={isSidebarOpen && ".25rem"} />
-                      <span className="text nav-text">Home</span>
+                      <Link to="/home" className="link-styling">
+                        <span className="text nav-text">Home</span>
+                      </Link>
                     </a>
                   </li>
                   <li
                     className={`nav-link ${!isSidebarOpen && "dFlex"}`}
-                    onClick={() => setMainPage("singleConservation")}
+                    onClick={() => setMainPage("singleConversation")}
                   >
                     <a href="#">
                       <img
@@ -239,12 +253,14 @@ const Sidebar = () => {
                           marginRight: isSidebarOpen && ".25rem",
                         }}
                       />
-                      <span
-                        className="text nav-text"
-                        style={{ marginTop: "0" }}
-                      >
-                        My Conservations
-                      </span>
+                      <Link to="/main/conversation">
+                        <span
+                          className="text nav-text"
+                          style={{ marginTop: "0" }}
+                        >
+                          My Conservations
+                        </span>
+                      </Link>
                     </a>
                   </li>
                   <li
@@ -253,7 +269,9 @@ const Sidebar = () => {
                   >
                     <a href="#">
                       <AllConversationIcon margin={isSidebarOpen && ".25rem"} />
-                      <span className="text nav-text">All Conservations</span>
+                      <Link to="/main/conversations">
+                        <span className="text nav-text">All Conservations</span>
+                      </Link>
                     </a>
                   </li>
                   <li className={`nav-link ${!isSidebarOpen && "dFlex"}`}>
@@ -377,9 +395,11 @@ const Sidebar = () => {
                 <p>Basic (Free)</p>
                 <div className="line-main"></div>
                 <p>1 of 300 monthly minutes used</p>
-                <button onClick={() => setMainPage("upgrade")}>
-                  Get Otter Pro
-                </button>
+                <Link to="/payment" className="link-styling">
+                  <button onClick={() => setMainPage("upgrade")}>
+                    Get Otter Pro
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -573,24 +593,34 @@ const Sidebar = () => {
                 <h4>Share with</h4>
               </div>
               <div className={styles.links}>
-                <span
-                  onClick={() => setPage("summary")}
-                  style={{
-                    borderBottom: page === "summary" && "3px solid #126fd6",
-                    color: page === "summary" && "#126fd6",
-                  }}
+                <Link to="/main/conversation/summary" className="link-styling">
+                  <span
+                    onClick={() => setPage("summary")}
+                    style={{
+                      borderBottom: page === "summary" && "3px solid #126fd6",
+                      color: page === "summary" && "#126fd6",
+                      padding: "0",
+                    }}
+                  >
+                    Summary
+                  </span>
+                </Link>
+                <Link
+                  to="/main/conversation/transcript"
+                  className="link-styling"
                 >
-                  Summary
-                </span>
-                <span
-                  onClick={() => setPage("transcript")}
-                  style={{
-                    borderBottom: page === "transcript" && "3px solid #126fd6",
-                    color: page === "transcript" && "#126fd6",
-                  }}
-                >
-                  Transcript
-                </span>
+                  <span
+                    onClick={() => setPage("transcript")}
+                    style={{
+                      borderBottom:
+                        page === "transcript" && "3px solid #126fd6",
+                      color: page === "transcript" && "#126fd6",
+                      padding: "0",
+                    }}
+                  >
+                    Transcript
+                  </span>
+                </Link>
               </div>
               {page === "summary" && <Summary />}
               {page === "transcript" && (
@@ -640,11 +670,11 @@ const Sidebar = () => {
             }
             display={isMobile && isSidebarOpen ? "none" : ""}
             padding={isMobile && "0"}
-            value="singleConservation"
+            value="singleConversation"
             click={() => setMainPage("conservation")}
             item="All"
           />
-        ) : mainPage === "singleConservation" ? (
+        ) : mainPage === "singleConversation" ? (
           <SingleConversation
             margin={
               isSidebarOpen
@@ -657,7 +687,7 @@ const Sidebar = () => {
             }
             display={isMobile && isSidebarOpen ? "none" : ""}
             padding={isMobile && "0"}
-            value="singleConservation"
+            value="singleConversation"
             click={() => setMainPage("conservation")}
             item="My"
           />
@@ -674,7 +704,7 @@ const Sidebar = () => {
               mainPage === "upgrade" ||
               mainPage === "home" ||
               mainPage === "allConversations" ||
-              mainPage === "singleConservation"
+              mainPage === "singleConversation"
                 ? "none"
                 : "",
           }}
